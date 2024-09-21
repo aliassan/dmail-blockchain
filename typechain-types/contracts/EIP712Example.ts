@@ -38,15 +38,22 @@ export type ExampleMessageStructOutput = [
 ] & { message: string; value: bigint; from: string; to: string };
 
 export interface EIP712ExampleInterface extends Interface {
-  getFunction(nameOrSignature: "verifyMessage"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "getBalance" | "verifyMessage"
+  ): FunctionFragment;
 
   getEvent(nameOrSignatureOrTopic: "AddressVerified"): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "getBalance",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "verifyMessage",
     values: [ExampleMessageStruct, BigNumberish, BytesLike, BytesLike]
   ): string;
 
+  decodeFunctionResult(functionFragment: "getBalance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "verifyMessage",
     data: BytesLike
@@ -108,6 +115,8 @@ export interface EIP712Example extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  getBalance: TypedContractMethod<[], [bigint], "view">;
+
   verifyMessage: TypedContractMethod<
     [
       message: ExampleMessageStruct,
@@ -123,6 +132,9 @@ export interface EIP712Example extends BaseContract {
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "getBalance"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "verifyMessage"
   ): TypedContractMethod<

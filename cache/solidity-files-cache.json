@@ -664,8 +664,8 @@
       ]
     },
     "/home/ali/Documents/Development/Code/Crypto/Projects/EthCapeTown/contracts/EIP712Example.sol": {
-      "lastModificationDate": 1726922371148,
-      "contentHash": "7433ea76cf0d99cfc480ab11d4915673",
+      "lastModificationDate": 1726923016545,
+      "contentHash": "b341ccfd66af55bce0a4faa48a3cc10d",
       "sourceName": "contracts/EIP712Example.sol",
       "solcConfig": {
         "version": "0.8.24",

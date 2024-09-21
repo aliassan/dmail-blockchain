@@ -30,20 +30,30 @@ describe("EIP712 Contract", function () {
       eip712Example = await EIP712Example.deploy();
     });
   
-    // it("should allow the owner to receive ETH", async function () {
-    //   const depositAmount = ethers.parseEther("1");
+    it("should allow the owner to receive ETH", async function () {
+      const depositAmount = ethers.parseEther("1");
   
-    //   await from.sendTransaction({
-    //     to: dMail.getAddress(),
-    //     value: depositAmount,
-    //   });
+      await from.sendTransaction({
+        to: eip712Example.getAddress(),
+        value: depositAmount,
+      });
   
-    //   const balance = await dMail.getBalance();
-    //   expect(balance).to.equal(depositAmount);
-    // });
+      const balance = await eip712Example.getBalance();
+      expect(balance).to.equal(depositAmount);
+    });
 
     describe('Then I can sign for a user to claim from the mail contract', async () => {
         beforeEach(async () => {
+          const depositAmount = ethers.parseEther("1");
+  
+          await from.sendTransaction({
+            to: eip712Example.getAddress(),
+            value: depositAmount,
+          });
+      
+          const balance = await eip712Example.getBalance();
+          expect(balance).to.equal(depositAmount)
+
           domain = {
             name: "EIP712Example",
             version: "1",
